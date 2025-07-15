@@ -553,4 +553,214 @@ body {
     left: 50%;
     transform: translate(-50%, -50%);
     background-color: rgba(0, 0, 0, 0.85);
-    color:
+    color: var(--color-white);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+    font-size: 1.2em;
+    text-align: center;
+    z-index: 200;
+    max-width: 80%;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+}
+
+.fact-display.active {
+    display: block;
+    opacity: 1;
+}
+
+/* Footer */
+.footer {
+    margin-top: 20px;
+    padding: 15px;
+    color: var(--color-golden-wheat);
+    font-size: 0.9em;
+    text-align: center;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    width: 100%;
+    max-width: 700px;
+    box-sizing: border-box;
+}
+
+.footer p {
+    margin: 5px 0;
+    line-height: 1.4;
+}
+
+.footer a {
+    color: var(--color-golden-wheat);
+    text-decoration: none;
+    font-weight: 700;
+    transition: color 0.3s ease;
+}
+
+.footer a:hover {
+    color: var(--color-white);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .game-container {
+        padding: 15px;
+        width: 100%;
+    }
+    
+    .game-title {
+        font-size: 2.2em;
+    }
+    
+    .game-stats {
+        font-size: 1.1em;
+        gap: 15px;
+    }
+    
+    .card-grid {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 8px;
+        max-width: 400px;
+    }
+    
+    .card {
+        width: 70px;
+        height: 70px;
+    }
+    
+    .card-face {
+        font-size: 2em;
+    }
+    
+    .game-actions {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .control-button {
+        padding: 12px 25px;
+        font-size: 1.1em;
+        max-width: 100%;
+    }
+    
+    .music-modal {
+        width: 280px;
+        height: 140px;
+        padding: 10px;
+        bottom: 15px;
+    }
+    
+    .music-modal-content h3 {
+        font-size: 1.3em;
+    }
+    
+    .music-controls-group {
+        flex-direction: column;
+    }
+    
+    .music-modal-content .player-buttons {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    
+    .music-modal-content button {
+        padding: 8px;
+        font-size: 0.9em;
+        flex-basis: 45%;
+    }
+    
+    .music-modal-content select {
+        max-width: 100%;
+    }
+    
+    .footer {
+        padding: 10px;
+        font-size: 0.8em;
+    }
+    
+    .fixed-bottom-right-button {
+        width: 45px;
+        height: 45px;
+        font-size: 1.5em;
+        bottom: 15px;
+        right: 15px;
+    }
+    
+    .fact-display {
+        font-size: 1em;
+        padding: 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .game-container {
+        padding: 10px;
+    }
+    
+    .game-title {
+        font-size: 1.8em;
+    }
+    
+    .game-stats {
+        font-size: 0.9em;
+        gap: 10px;
+    }
+    
+    .card-grid {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 6px;
+        max-width: 300px;
+    }
+    
+    .card {
+        width: 60px;
+        height: 60px;
+    }
+    
+    .card-face {
+        font-size: 1.8em;
+    }
+    
+    .control-button {
+        padding: 10px 20px;
+        font-size: 1em;
+    }
+    
+    .music-modal {
+        width: 200px;
+        height: 120px;
+        padding: 8px;
+    }
+    
+    .music-modal-content h3 {
+        font-size: 1.2em;
+    }
+    
+    .music-modal-content button {
+        padding: 6px;
+        font-size: 0.8em;
+    }
+    
+    .music-modal-close {
+        font-size: 20px;
+        top: 5px;
+        right: 5px;
+    }
+    
+    .footer {
+        padding: 8px;
+        font-size: 0.7em;
+    }
+    
+    .fixed-bottom-right-button {
+        width: 40px;
+        height: 40px;
+        font-size: 1.3em;
+        bottom: 10px;
+        right: 10px;
+    }
+    
+    .fact-display {
+        font-size: 0.9em;
+        padding: 10px;
+    }
+}
