@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لعبة الذاكرة السورية - Syrian Memory Game</title>
+    <meta name="description" content="لعبة ذاكرة تعليمية عن الثورة السورية المباركة">
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <!-- Orientation message for portrait mode -->
+    <div class="orientation-message">
+        <p>الرجاء تدوير جهازك إلى الوضع الأفقي للعب.</p>
+        <p>Please rotate your device to landscape mode to play.</p>
+    </div>
+
+    <!-- Main game container -->
+    <div class="game-container">
+        <div class="game-header">
+            <div class="game-title">لعبة الذاكرة السورية</div>
+            <div class="game-stats">
+                <div>الحركات: <span id="moves">0</span></div>
+                <div>الوقت: <span id="time">0</span> ثانية</div>
+                <div>أفضل نتيجة: <span id="topScore">--</span></div>
+            </div>
+        </div>
+
+        <div class="difficulty-selector-group">
+            <label for="difficultySelector">اختر الصعوبة:</label>
+            <select id="difficultySelector">
+                <option value="easy">سهل (4x4)</option>
+                <option value="medium" selected>متوسط (6x4)</option>
+                <option value="hard">صعب (8x6)</option>
+            </select>
+        </div>
+
+        <div class="card-grid" id="cardGrid"></div>
+
+        <div class="game-actions">
+            <button id="startButton" class="control-button">ابدأ اللعبة</button>
+            <button id="aboutButton" class="control-button">حول هذه اللعبة</button>
+        </div>
+
+        <!-- Game message overlay -->
+        <div id="messageBox" class="message-box">
+            <h2 class="message-subtitle">لنترحم على جميع شهداء الثورة السورية المباركة</h2>
+            <h2 id="messageText">اضغط على "ابدأ اللعبة" للعب!</h2>
+            <button id="restartButton" class="restart-button">ابدأ اللعبة</button>
+        </div>
+    </div>
+
+    <!-- Music Player Modal -->
+    <div class="music-modal" id="musicModal">
+        <div class="music-modal-content">
+            <span class="music-modal-close" id="musicModalClose">&times;</span>
+            <h3>مشغل الموسيقى</h3>
+            
+            <div class="music-controls-group" style="justify-content: space-around; flex-direction: row; gap: 15px;">
+                <button id="muteMusicToggleButton" style="width: auto; padding: 5px 10px;">
+                    <i class="fas fa-volume-up" id="musicVolumeIcon"></i> الموسيقى
+                </button>
+                <button id="muteSfxToggleButton" style="width: auto; padding: 5px 10px;">
+                    <i class="fas fa-bell" id="sfxVolumeIcon"></i> المؤثرات
+                </button>
+            </div>
+            
+            <div class="music-controls-group">
+                <label for="songSelector">اختر أغنية:</label>
+                <select id="songSelector"></select>
+            </div>
+            
+            <div class="music-controls-group seek-slider-container">
+                <span id="currentTimeDisplay">0:00</span>
+                <input type="range" id="seekSlider" min="0" max="100" value="0">
+                <span id="durationDisplay">0:00</span>
+            </div>
+            
+            <div class="music-controls-group player-buttons">
+                <button id="prevSongButton"><i class="fas fa-backward"></i></button>
+                <button id="stopButton"><i class="fas fa-stop"></i></button>
+                <button id="playPauseButton"><i class="fas fa-play"></i></button>
+                <button id="nextSongButton"><i class="fas fa-forward"></i></button>
+            </div>
+            
+            <div class="music-controls-group volume-slider-container">
+                <span>-</span>
+                <input type="range" id="volumeSlider" min="0" max="1" step="0.01" value="0.5">
+                <span>+</span>
+            </div>
+            
+            <audio id="gameAudio" preload="auto"></audio>
+        </div>
+    </div>
+
+    <!-- About Modal -->
+    <div id="aboutModal" class="about-modal">
+        <div class="about-modal-content">
+            <span class="about-modal-close" id="aboutModalClose">&times;</span>
+            <h3>حول لعبة الذاكرة السورية</h3>
+            
+            <svg class="eagle-svg-icon" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                <path d="M100,10 C130,10 170,30 190,70 C180,90 160,110 140,120 C150,130 160,150 160,170 C150,180 130,190 100,190 C70,190 50,180 40,170 C40,150 50,130 60,120 C40,110 20,90 10,70 C30,30 70,10 100,10 Z M100,60 C110,60 120,70 120,80 C120,90 110,100 100,100 C90,100 80,90 80,80 C80,70 90,60 100,60 Z" fill-rule="evenodd"/>
+                <polygon points="90,25 95,35 105,35 100,25 105,15 95,15" transform="translate(-15, -10)" />
+                <polygon points="90,25 95,35 105,35 100,25 105,15 95,15" transform="translate(0, -10)" />
+                <polygon points="90,25 95,35 105,35 100,25 105,15 95,15" transform="translate(15, -10)" />
+            </svg>
+            
+            <p>هذه لعبة ذاكرة بسيطة مستوحاة من الألوان والرموز السورية.</p>
+            <p>الهدف هو العثور على جميع أزواج البطاقات المتطابقة في أقل عدد من الحركات وأسرع وقت ممكن.</p>
+            <p>استمتع باللعب والموسيقى!</p>
+            <p>عند مطابقة البطاقات، ستحصل على حقائق مثيرة للاهتمام عن الثورة السورية المباركة✨</p>
+            <p>للوصول إلى مشغل الموسيقى، انقر على أيقونة <i class="fas fa-music"></i> في الزاوية السفلية اليمنى من الشاشة.</p>
+        </div>
+    </div>
+
+    <!-- Fixed Music Player Icon -->
+    <div class="fixed-bottom-right-button" id="musicPlayerIconButton">
+        <i class="fas fa-music"></i>
+    </div>
+
+    <!-- Fact Display -->
+    <div id="factDisplay" class="fact-display">
+        <p id="factText"></p>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>برمجة أُبي سكر | تصميم حياة الخضر</p>
+        <p>
+            <a href="https://twitter.com/obai.sukar" target="_blank" rel="noopener noreferrer">@obai.sukar</a> |
+            <a href="https://twitter.com/hayat.ka" target="_blank" rel="noopener noreferrer">@hayat.ka</a>
+        </p>
+        <p>جميع الحقوق محفوظة للثورة السورية المباركة وللشعب السوري الحر</p>
+    </footer>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
